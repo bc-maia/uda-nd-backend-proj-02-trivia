@@ -1,0 +1,46 @@
+###
+GET /categories HTTP/1.1
+Host: localhost:5000
+
+###
+GET /questions?page=2 HTTP/1.1
+Host: localhost:5000
+
+###
+POST /questions HTTP/1.1
+Host: localhost:5000
+Content-Type: application/json
+
+{
+    "question": "This is a question?",
+    "answer": "YES",
+    "category": "1",
+    "difficulty": "1"
+}
+
+###
+DELETE /questions/30 HTTP/1.1
+Host: localhost:5000
+
+###
+POST /find HTTP/1.1
+Host: localhost:5000
+Content-Type: application/json
+
+{ "searchTerm":"question" }
+
+###
+GET /categories/1/questions HTTP/1.1
+Host: localhost:5000
+
+###
+POST /quizzes HTTP/1.1
+Host: localhost:5000
+Content-Type: application/json
+
+{
+    "previous_questions": [], 
+    "quiz_category": {
+        "type": "Science", "id": "1"
+        }
+}
