@@ -1,11 +1,7 @@
-import os
 from sqlalchemy import Column, String, Integer, create_engine
 from flask_sqlalchemy import SQLAlchemy
 import json
 
-database_address = "localhost:5432"
-database_name = "trivia_db"
-database_path = f"postgres://{database_address}/{database_name}"
 
 db = SQLAlchemy()
 
@@ -15,12 +11,29 @@ setup_db(app)
 """
 
 
-def setup_db(app, database_path=database_path):
-    app.config["SQLALCHEMY_DATABASE_URI"] = database_path
-    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+def setup_db(app):
+    app.config.from_object("config")
     db.app = app
     db.init_app(app)
     db.create_all()
+
+
+"""
+Category
+"""
+
+
+class Category(db.Model):
+    __tablename__ = "categories"
+
+    id = Column(Integer, primary_key=True)
+    type = Column(String)
+
+    def __init__(self, type):
+        self.type = type
+
+    def format(self):
+        return {"id": self.id, "type": self.type}
 
 
 """
@@ -62,21 +75,3 @@ class Question(db.Model):
             "category": self.category,
             "difficulty": self.difficulty,
         }
-
-
-"""
-Category
-"""
-
-
-class Category(db.Model):
-    __tablename__ = "categories"
-
-    id = Column(Integer, primary_key=True)
-    type = Column(String)
-
-    def __init__(self, type):
-        self.type = type
-
-    def format(self):
-        return {"id": self.id, "type": self.type}
