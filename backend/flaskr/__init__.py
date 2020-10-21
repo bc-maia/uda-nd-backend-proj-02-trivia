@@ -94,12 +94,11 @@ def create_app(test_config=None):
 
     @app.route("/questions/<int:question_id>", methods=["DELETE"])
     def get_question_by_id(question_id):
-        try:
-            question = Question.query.get(question_id)
-            if question:
-                question.delete()
-                return jsonify({"success": True})
-        except:
+        question = Question.query.get(question_id)
+        if question:
+            question.delete()
+            return (jsonify({"success": True}), 200)
+        else:
             abort(404)
 
     """

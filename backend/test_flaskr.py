@@ -48,7 +48,7 @@ class TriviaTestCase(unittest.TestCase):
 
     def test_error_questions_page_not_found(self):
         response = self.client().get("/questions?page=99")
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 400)
 
     # POST /questions
     def test_create_question(self):
@@ -88,7 +88,7 @@ class TriviaTestCase(unittest.TestCase):
     def test_error_question_not_found(self):
         payload = {"searchTerm": "sharknado"}
         response = self.client().post("/find", json=payload)
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 400)
 
     # DELETE /questions/{question_id}
     def test_question_delete(self):
@@ -99,6 +99,7 @@ class TriviaTestCase(unittest.TestCase):
 
     def test_error_delete_question_wrong_id(self):
         response = self.client().delete("/questions/999")
+        data = json.loads(response.data)
         self.assertEqual(response.status_code, 404)
 
     # /categories/{category_id}/questions
