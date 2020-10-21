@@ -14,7 +14,7 @@ As developer you can try those API requests using any tool able to make HTML req
 Errors are returned as JSON objects in the following format:
 ```
 {
-    "success": False, 
+    "success": False,
     "error": 400,
     "message": "bad request"
 }
@@ -23,11 +23,11 @@ The API will return Four error types when requests fail:
 - 400: Bad Request
 - 404: Resource Not Found
 - 405: Method Not Allowed
-- 422: Not Processable 
+- 422: Not Processable
 
 ___
 
-## Endpoints 
+## Endpoints
 
 
 
@@ -258,7 +258,7 @@ _Response_
 * Body (JSON):
 ```JSON
 {
-    "previous_questions": [], 
+    "previous_questions": [],
     "quiz_category": {
         "type": "Science", "id": "1"
         }
